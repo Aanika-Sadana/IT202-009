@@ -11,23 +11,28 @@
 
 <?php
 if(isset($_POST["register"])){
-  $email = null;
-  $password = null;
-  $confirm = null;
-  if(isset($_POST["email"])){
-    $email = $_POST["email"];
-  }
-  if(isset($_POST["password"])){
-    $password = $_POST["password"];
-  }
-  if(isset($_POST["confirm"])){
-    $confirm = $_POST["confirm"];
-  }
-$isValid = true;
+	$email = null;
+  	$password = null;
+  	$confirm = null;
 
-if($password == $confirm){
-        echo "Passwords match<br>";
-}
+ 	if(isset($_POST["email"])){
+    		$email = $_POST["email"];
+  	}
+
+  	if(isset($_POST["password"])){
+    		$password = $_POST["password"];
+  	}
+
+	if(isset($_POST["confirm"])){
+    		$confirm = $_POST["confirm"];
+  	}
+
+	$isValid = true;
+
+	if($password == $confirm){
+        	echo "Passwords match<br>";
+	}
+
 else{
         echo "Passwords don't match<br>";
         $isValid = false;
@@ -57,6 +62,7 @@ if($isValid){
                 if($e[0] == "00000"){
                         echo "<br>Welcome! You successfully registered, please login.";
                 }
+
                 else{
                         echo "uh oh something went wrong: " . var_export($e, true);
                 }

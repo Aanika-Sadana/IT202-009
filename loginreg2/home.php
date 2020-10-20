@@ -10,7 +10,7 @@ session_start();
 </ul>
 
 <?php
-//we'll use this to safely get the email to display
+
 $email = "";
 
 if(isset($_SESSION["user"]) && isset($_SESSION["user"]["email"])){

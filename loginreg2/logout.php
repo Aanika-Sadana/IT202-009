@@ -1,6 +1,5 @@
 <?php
 
-//starts/loads a session, basically tells php to do its magic ooOOoOooOOooo
 session_start();
 
 //remove all session variables
