@@ -13,4 +13,25 @@ if(isset($_SESSION["user"]) && isset($_SESSION["user"]["email"])){
 
 ?>
 
+<h2>Home</h2>
+
 <p>Welcome, <?php echo $email; ?> </p>
+
+
+<style>
+        *{
+                text-align: center;
+        }
+
+	p{
+		color: #5b6e85;
+		font-family: Helvetica;
+	}
+
+        h2{
+                color: #23354a;
+                font-family: Helvetica;
+        }
+
+</style>
+

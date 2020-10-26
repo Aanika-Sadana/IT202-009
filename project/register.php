@@ -26,7 +26,6 @@ if (isset($_POST["register"])) {
 
     	//check if passwords match on the server side
     	if ($password == $confirm) {
-        	echo "Passwords match <br>";
     	}
 
     	else {
@@ -51,8 +50,6 @@ if (isset($_POST["register"])) {
             		$params = array(":email" => $email, ":username" => $username, ":password" => $hash);
             		$r = $stmt->execute($params);
 
-            		//let's just see what's returned
-            		echo "db returned: " . var_export($r, true);
             		$e = $stmt->errorInfo();
 
             		if ($e[0] == "00000") {
@@ -86,14 +83,38 @@ if (!isset($username)) {
 }
 ?>
 
+<h2>Register</h2>
+
 <form method="POST">
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required value="<?php safer_echo($email); ?>"/>
-    <label for="user">Username:</label>
-    <input type="text" id="user" name="username" required maxlength="60" value="<?php safer_echo($username); ?>"/>
-    <label for="p1">Password:</label>
-    <input type="password" id="p1" name="password" required/>
-    <label for="p2">Confirm Password:</label>
-    <input type="password" id="p2" name="confirm" required/>
-    <input type="submit" name="register" value="Register"/>
+    <label for="email">Email:</label><br>
+    <input type="email" id="email" name="email" required value="<?php safer_echo($email); ?>"/><br><br>
+    <label for="user">Username:</label><br>
+    <input type="text" id="user" name="username" required maxlength="60" value="<?php safer_echo($username); ?>"/><br><br>
+    <label for="p1">Password:</label><br>
+    <input type="password" id="p1" name="password" required/><br><br>
+    <label for="p2">Confirm Password:</label><br>
+    <input type="password" id="p2" name="confirm" required/><br><br>
+    <input type="submit" id="submit" name="register" value="Register"/>
 </form>
+
+<style>
+	*{
+		text-align: center;
+	}
+
+	label{
+		color: #5b6e85;
+		font-family: Helvetica;
+	}
+
+	h2{
+		color: #23354a;
+		font-family: Helvetica;
+	}
+
+	#submit{
+		background-color: #b6c0cc;
+		border: none;
+		padding: 10px;
+	}
+</style>
