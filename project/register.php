@@ -29,7 +29,7 @@ if (isset($_POST["register"])) {
     	}
 
     	else {
-        	echo "Passwords don't match<br>";
+        	flash("Passwords don't match");
         	$isValid = false;
     	}
 
@@ -53,23 +53,23 @@ if (isset($_POST["register"])) {
             		$e = $stmt->errorInfo();
 
             		if ($e[0] == "00000") {
-                		echo "<br>Welcome! You successfully registered, please login.";
+                		flash("Successfully registered, please login.");
             		}
 
             		else {
                 		if ($e[0] == "23000") { //code for duplicate entry
-                   	 	echo "<br>Either username or email is already registered, please try again";
+                   	 	flash("Either username or email is already registered, please try again");
                 	}
 
                 	else {
-                    		echo "uh oh something went wrong: " . var_export($e, true);
+                    		flash("uh oh something went wrong");
                 	}
             	}
         }
 }
 
 else {
-	echo "There was a validation issue";
+	flash("There was a validation issue");
 }
 }
 
@@ -96,6 +96,8 @@ if (!isset($username)) {
     <input type="password" id="p2" name="confirm" required/><br><br>
     <input type="submit" id="submit" name="register" value="Register"/>
 </form>
+
+<?php require(__DIR__ . "/partials/flash.php");
 
 <style>
 	*{

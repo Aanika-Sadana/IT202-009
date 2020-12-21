@@ -40,10 +40,10 @@ if (isset($_POST["login"])) {
         $isValid = false;
 
 	if(!isset($entry)){
-		echo "<br>Email/Username not entered<br>";
+		flash("Email/Username not entered");
 	}
 	if(!isset($password)){
-		echo "<br>Password not entered<br>";
+		flash("Password not entered");
 	}
     }
 
@@ -69,7 +69,8 @@ if (isset($_POST["login"])) {
             $r = $stmt->execute($params);
             $e = $stmt->errorInfo();
             if ($e[0] != "00000") {
-                echo "uh oh something went wrong: " . var_export($e, true);
+                //echo "uh oh something went wrong: " . var_export($e, true);
+		flash("Something went wrong, please try again");
             }
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
             if ($result && isset($result["password"])) {
@@ -90,23 +91,25 @@ SELECT Roles.name FROM Roles JOIN UserRoles on Roles.id = UserRoles.role_id wher
                         $_SESSION["user"]["roles"] = [];
                     }
                     //on successful login let's serve-side redirect the user to the home page.
-                    header("Location: home.php");
+                    	flash("Log in successful");
+			die(header("Location: home.php"));
                 }
                 else {
-                    echo "<br>Invalid password!<br>";
+                    flash("Invalid password!");
                 }
             }
             else {
-                echo "<br>Invalid user<br>";
+                flash("Invalid user");
             }
         }
     }
     else {
-        echo "There was a validation issue";
+        flash("There was a validation issue");
     }
 }
 ?>
 
+<?php require(__DIR__ . "/partials/flash.php");
 
 <style>
         *{
