@@ -1,1 +1,1 @@
-contains all structural changes that the database and tabels go through
+contains all structural changes that the database and tables go through

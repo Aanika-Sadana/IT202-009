@@ -1,4 +1,4 @@
-contains files taht aren't standalone
+contains files that aren't standalone
 
 should never be called in the URL by themselves
 

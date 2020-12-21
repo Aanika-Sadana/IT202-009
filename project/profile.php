@@ -5,6 +5,7 @@ require_once(__DIR__ . "/partials/nav.php"); ?>
 //we'll fetch the updated data and have it correctly reflect on the form below
 if (!is_logged_in()) {
     	//this will redirect to login and kill the rest of this script (prevent it from executing)
+	flash("You must be logged in to access this page");
     	die(header("Location: login.php"));
 }
 
@@ -36,7 +37,7 @@ if (isset($_POST["saved"])) {
         }
 
         if ($inUse > 0) {
-            	echo "Email is already in use";
+            	flash("Email is already in use");
 
             	//for now we can just stop the rest of the update
             	$isValid = false;
@@ -66,7 +67,7 @@ if (get_username() != $_POST["username"]) {
        	}
 
         if ($inUse > 0) {
-            	echo "Username is already in use";
+            	flash("Username is already in use");
 
             	//for now we can just stop the rest of the update
             	$isValid = false;
@@ -82,11 +83,11 @@ if (get_username() != $_POST["username"]) {
         	$r = $stmt->execute([":email" => $newEmail, ":username" => $newUsername, ":id" => get_user_id()]);
 
         if ($r) {
-            	echo "Updated profile";
+            	flash("Updated profile");
         }
 
         else {
-            	echo "Error updating profile";
+            	flash("Error updating profile");
         }
 
         //password is optional, so check if it's even set
@@ -101,11 +102,11 @@ if (get_username() != $_POST["username"]) {
                 	$r = $stmt->execute([":id" => get_user_id(), ":password" => $hash]);
 
                 if ($r) {
-                    	echo "Reset password";
+                    	flash("Reset password");
                 }
 
                 else {
-                    	echo "Error resetting password";
+                    	flash("Error resetting password");
                 }
 	}
 }
@@ -145,3 +146,5 @@ else {
     	<input type="password" name="confirm"/>
     	<input type="submit" name="saved" value="Save Profile"/>
 </form>
+
+<?php require(__DIR__ . "/partials/flash.php");
