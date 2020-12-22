@@ -1,6 +1,6 @@
-<?php require_once(__DIR__ . "/../partials/nav.php"); ?>
+<?php require_once(__DIR__ . "/partials/nav.php"); ?>
 <?php
-if(!has_role("Admin")){
+if(!has_role("Tester")){
     //redirects to login and kills the rest of script (prevents it from executing)
     flash("You don't have permission to access this page");
     die(header("Location: login.php"));
@@ -56,4 +56,4 @@ if(isset($_POST["save"])){
 
 ?>
 
-<?php require(__DIR__ . "/../partials/flash.php");
+<?php require(__DIR__ . "/partials/flash.php");?>
