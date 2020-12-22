@@ -97,7 +97,7 @@ if (!isset($username)) {
     <input type="submit" id="submit" name="register" value="Register"/>
 </form>
 
-<?php require(__DIR__ . "/partials/flash.php");
+<?php require(__DIR__ . "/partials/flash.php");?>
 
 <style>
 	*{
