@@ -68,5 +68,21 @@ function getMessages() {
     return array();
 }
 
-//end flash
+function getVisibility($n){
+	switch($n){
+		case  0:
+			echo "Draft";
+			break;
+		case 1:
+			echo "Private";
+			break;
+		case 2:
+			echo "Public";
+			break;
+		default:
+			echo "Unsupported state: " . safer_echo($n);
+			break;
+	}
+}
+
 ?>
