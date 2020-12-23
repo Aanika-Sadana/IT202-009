@@ -17,7 +17,7 @@ if (isset($_GET["id"])) {
 $result = [];
 if (isset($id)) {
     $db = getDB();
-    $stmt = $db->prepare("SELECT title,description,visibility,created,modified FROM Survey WHERE Survey.id = :id");
+    $stmt = $db->prepare("SELECT Questions.*  FROM Questions JOIN Users on Users.id = Users.id LEFT JOIN F20_Eggs Egg on Egg.id = incu.egg_id where incu.id = :id");
     $r = $stmt->execute([":id" => $id]);
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     if (!$result) {
@@ -26,25 +26,22 @@ if (isset($id)) {
     }
 }
 ?>
+    <h3>View Incubator</h3>
 <?php if (isset($result) && !empty($result)): ?>
     <div class="card">
         <div class="card-title">
-            <?php safer_echo($result["title"]); ?>
+            <?php safer_echo($result["name"]); ?>
         </div>
         <div class="card-body">
             <div>
-                <p>Info</p>
-                <div>Title: <?php safer_echo($result["title"]); ?></div>
-                <div>Description: <?php safer_echo($result["description"]); ?></div>
-                <div>Visibility: <?php safer_echo($result["visibility"]); ?></div>
-                <div>Create Date: <?php safer_echo($result["created"]); ?></div>
-                <div>Modify Date: <?php safer_echo($result["modified"]); ?></div>
-                </div>
+                <p>Stats</p>
+                <div>Rate: <?php safer_echo($result["base_rate"]); ?></div>
+                <div>Modifier: <?php safer_echo($result["mod_min"]); ?> - <?php safer_echo($result["mod_max"]); ?></div>
+                <div>Egg: <?php safer_echo($result["egg"]); ?></div>
+                <div>Owned by: <?php safer_echo($result["username"]); ?></div>
+            </div>
         </div>
-
     </div>
-<button type="button">Add a question</button>
-
 <?php else: ?>
     <p>Error looking up id...</p>
 <?php endif; ?>

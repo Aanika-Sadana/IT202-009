@@ -61,7 +61,7 @@ if(isset($_POST["search"]) && !empty($query)){
 
 					<div>
 						<div>Modify Date:</div>
-						<div><?php safer_echo($r["modified:"]); ?></div>
+						<div><?php safer_echo($r["modified"]); ?></div>
 					</div>
 
 					<div>
