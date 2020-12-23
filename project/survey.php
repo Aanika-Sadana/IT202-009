@@ -3,7 +3,7 @@
 if (!is_logged_in()) {
     //this will redirect to login and kill the rest of this script (prevent it from executing)
     flash("You don't have permission to access this page");
-    die(header("Location: .getURL(login.php")));
+    die(header("Location: login.php"));
 }
 ?>
 
@@ -15,7 +15,7 @@ if (isset($_POST["submit"])) {
     $user_id = get_user_id();
     $params = [];
     $query = "INSERT INTO Responses (survey_id, question_id, answer_id, user_id) VALUES"; //ignore sql error hint
-    $i = 0; //can't use $key here since it presents a question_id and will always be > 0, so using a temp var to count
+    $i = 0;
     foreach ($_POST as $key => $item) {
         if (is_numeric($key)) {
             //assuming this is question id
@@ -92,7 +92,7 @@ else {
 }
 else {
     flash("Invalid survey, please try again", "warning");
-    die(header("Location: " "surveys.php"));
+     die(header("Location: " . getURL("surveys.php")));
 }
 ?>
 
