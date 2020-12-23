@@ -11,6 +11,30 @@ if (!is_logged_in()) {
 
 $db = getDB();
 
+
+if(isset($_POST["public"])){
+	$stmt = $db->prepare("UPDATE Users set privacy = 1 where id = :id");
+	$r = $stmt->execute([":id"=> get_user_id()]);
+	flash("profile is now public");
+}
+
+if (isset($_POST["private"])){
+  	$stmt = $db->prepare("UPDATE Users set privacy = 0 where id = :id");
+  	$r = $stmt->execute([":id" => get_user_id()]);
+  	flash("profile is now  private");
+}
+
+if (isset($_GET["id"])){
+  $stmt = $db->prepare("SELECT email, username, created, privacy from Users where id = :id");
+  $r = $stmt->execute([":id" => $_GET["id"]]);
+  $result = $stmt->fetchall(PDO::FETCH_ASSOC);
+  if ($result[0]["privacy"] == 0){
+    flash("Account is private");
+  }
+}
+
+
+
 //save data if we submitted the form
 if (isset($_POST["saved"])) {
     	$isValid = true;
@@ -146,5 +170,24 @@ else {
     	<input type="password" name="confirm"/>
     	<input type="submit" name="saved" value="Save Profile"/>
 </form>
+
+<form method="POST">
+	<button type="submit" name="public">Public</button>
+	<button type="submit" name="private">Private</button>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <?php require(__DIR__ . "/partials/flash.php");?>
